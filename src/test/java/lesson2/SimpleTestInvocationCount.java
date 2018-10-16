@@ -1,26 +1,24 @@
-package lesson1;
+package lesson2;
 
+import base.TestBase;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.testng.annotations.Test;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
-import static java.lang.System.setProperty;
 import static org.testng.Assert.assertEquals;
 
-public class SimpleTest {
+public class SimpleTestInvocationCount extends TestBase {
 
-    @Test
+    @Test(invocationCount = 3, threadPoolSize = 3)
     public void simpleTest() {
-        setProperty("webdriver.chrome.driver", "src\\main\\resources\\chromedriver.exe");
 
-        //1 Open BR
+        //1 OpenBR
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
-        //driver.manage().window().fullscreen(); same maximize()
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 
         //2 Navigate
@@ -39,5 +37,6 @@ public class SimpleTest {
         assertEquals(mainTitle.getText(), "EPAM FRAMEWORK WISHES…");
 
         driver.close();
+        driver.quit();
     }
 }
