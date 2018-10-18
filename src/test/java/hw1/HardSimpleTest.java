@@ -66,7 +66,6 @@ public class HardSimpleTest {
                 "EPAM project");
         benefitTexts.add("To be flexible and" + "\n" + "customizable");
         benefitTexts.add("To be multiplatform");
-        benefitTexts.add("To be multiplatform");
         benefitTexts.add("Already have good base" + "\n" +
                 "(about 20 internal and" + "\n" +
                 "some external projects)," + "\n" +
