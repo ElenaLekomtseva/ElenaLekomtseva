@@ -6,6 +6,7 @@ import org.testng.annotations.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -44,40 +45,36 @@ public class HardSimpleTest {
                 By.xpath("//ul[@class = 'uui-navigation nav navbar-nav m-l8']/li/a"));
         assertEquals(menuElements.size(), 4);
 
-        //"HOME"
-        assertTrue(menuElements.get(0).isDisplayed());
-        assertEquals(menuElements.get(0).getText(), "HOME");
-
-        //"CONTACT FORM"
-        assertTrue(menuElements.get(1).isDisplayed());
-        assertEquals(menuElements.get(1).getText(), "CONTACT FORM");
-
-        //"SERVICE"
-        assertTrue(menuElements.get(2).isDisplayed());
-        assertEquals(menuElements.get(2).getText(), "SERVICE");
-
-        //"METALS & COLORS"
-        assertTrue(menuElements.get(3).isDisplayed());
-        assertEquals(menuElements.get(3).getText(), "METALS & COLORS");
+        ArrayList<String> menuItems = new ArrayList<String>();
+        menuItems.add("HOME");
+        menuItems.add("CONTACT FORM");
+        menuItems.add("SERVICE");
+        menuItems.add("METALS & COLORS");
+        for (WebElement element : menuElements) {
+            assertTrue(element.isDisplayed());
+            assertTrue(menuItems.contains(element.getText()));
+        }
 
         //7 Assert that there are 4 images on the Index Page and they are displayed
         List<WebElement> benefitsElements = driver.findElements(By.xpath("//div[@class = 'col-sm-3']"));
         assertEquals(benefitsElements.size(), 4);
 
         //8 Assert that there are 4 texts on the Index Page under icons and they have proper text
-        assertTrue(benefitsElements.get(0).isDisplayed());
-        assertEquals(benefitsElements.get(0).getText(), "To include good practices" + "\n" +
+        ArrayList<String> benefitTexts = new ArrayList<String>();
+        benefitTexts.add("To include good practices" + "\n" +
                 "and ideas from successful" + "\n" +
                 "EPAM project");
-        assertTrue(benefitsElements.get(1).isDisplayed());
-        assertEquals(benefitsElements.get(1).getText(), "To be flexible and" + "\n" + "customizable");
-        assertTrue(benefitsElements.get(2).isDisplayed());
-        assertEquals(benefitsElements.get(2).getText(), "To be multiplatform");
-        assertTrue(benefitsElements.get(3).isDisplayed());
-        assertEquals(benefitsElements.get(3).getText(), "Already have good base" + "\n" +
+        benefitTexts.add("To be flexible and" + "\n" + "customizable");
+        benefitTexts.add("To be multiplatform");
+        benefitTexts.add("To be multiplatform");
+        benefitTexts.add("Already have good base" + "\n" +
                 "(about 20 internal and" + "\n" +
                 "some external projects)," + "\n" +
                 "wish to get more…");
+        for (WebElement elemant : benefitsElements) {
+            assertTrue(elemant.isDisplayed());
+            assertTrue(benefitTexts.contains(elemant.getText()));
+        }
 
         //9 Assert a text of the main header
         WebElement mainTitle = driver.findElement(By.cssSelector("h3.main-title"));
@@ -95,10 +92,11 @@ public class HardSimpleTest {
         //11 Switch to the iframe and check that there is Epam logo in the left top conner of iframe
         String windowHandler = driver.getWindowHandle();
         driver.switchTo().frame(frame);
-        WebElement frameLogo =  driver.findElement(By.xpath("//img[@id = 'epam_logo']"));
+        WebElement frameLogo = driver.findElement(By.xpath("//img[@id = 'epam_logo']"));
         assertTrue(frameLogo.isDisplayed());
 
         //12 Switch to original window back
+        // other methods defaultContent() parentFrame()
         driver.switchTo().window(windowHandler);
 
         //13 Assert a text of the sub header

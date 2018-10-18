@@ -7,15 +7,16 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class SoftSimpleTest {
 
+    private SoftAssert softAssert = new SoftAssert();
+
     @Test
     public void simpleTest() {
-
-        SoftAssert softAssert = new SoftAssert();
 
         //1 Open test site by URL
         WebDriver driver = new ChromeDriver();
@@ -44,40 +45,36 @@ public class SoftSimpleTest {
                 By.xpath("//ul[@class = 'uui-navigation nav navbar-nav m-l8']/li/a"));
         softAssert.assertEquals(menuElements.size(), 4);
 
-        //"HOME"
-        softAssert.assertTrue(menuElements.get(0).isDisplayed());
-        softAssert.assertEquals(menuElements.get(0).getText(), "HOME");
-
-        //"CONTACT FORM"
-        softAssert.assertTrue(menuElements.get(1).isDisplayed());
-        softAssert.assertEquals(menuElements.get(1).getText(), "CONTACT FORM");
-
-        //"SERVICE"
-        softAssert.assertTrue(menuElements.get(2).isDisplayed());
-        softAssert.assertEquals(menuElements.get(2).getText(), "SERVICE");
-
-        //"METALS & COLORS"
-        softAssert.assertTrue(menuElements.get(3).isDisplayed());
-        softAssert.assertEquals(menuElements.get(3).getText(), "METALS & COLORS");
+        ArrayList<String> menuItems = new ArrayList<String>();
+        menuItems.add("HOME");
+        menuItems.add("CONTACT FORM");
+        menuItems.add("SERVICE");
+        menuItems.add("METALS & COLORS");
+        for (WebElement element : menuElements) {
+            softAssert.assertTrue(element.isDisplayed());
+            softAssert.assertTrue(menuItems.contains(element.getText()));
+        }
 
         //7 Assert that there are 4 images on the Index Page and they are displayed
         List<WebElement> benefitsElements = driver.findElements(By.xpath("//div[@class = 'col-sm-3']"));
         softAssert.assertEquals(benefitsElements.size(), 4);
 
         //8 Assert that there are 4 texts on the Index Page under icons and they have proper text
-        softAssert.assertTrue(benefitsElements.get(0).isDisplayed());
-        softAssert.assertEquals(benefitsElements.get(0).getText(), "To include good practices" + "\n" +
+        ArrayList<String> benefitTexts = new ArrayList<String>();
+        benefitTexts.add("To include good practices" + "\n" +
                 "and ideas from successful" + "\n" +
                 "EPAM project");
-        softAssert.assertTrue(benefitsElements.get(1).isDisplayed());
-        softAssert.assertEquals(benefitsElements.get(1).getText(), "To be flexible and" + "\n" + "customizable");
-        softAssert.assertTrue(benefitsElements.get(2).isDisplayed());
-        softAssert.assertEquals(benefitsElements.get(2).getText(), "To be multiplatform");
-        softAssert.assertTrue(benefitsElements.get(3).isDisplayed());
-        softAssert.assertEquals(benefitsElements.get(3).getText(), "Already have good base" + "\n" +
+        benefitTexts.add("To be flexible and" + "\n" + "customizable");
+        benefitTexts.add("To be multiplatform");
+        benefitTexts.add("To be multiplatform");
+        benefitTexts.add("Already have good base" + "\n" +
                 "(about 20 internal and" + "\n" +
                 "some external projects)," + "\n" +
                 "wish to get more…");
+        for (WebElement elemant : benefitsElements) {
+            softAssert.assertTrue(elemant.isDisplayed());
+            softAssert.assertTrue(benefitTexts.contains(elemant.getText()));
+        }
 
         //9 Assert a text of the main header
         WebElement mainTitle = driver.findElement(By.cssSelector("h3.main-title"));
@@ -116,6 +113,8 @@ public class SoftSimpleTest {
         //16 Assert that there is Footer
         WebElement footer = driver.findElement(By.cssSelector("footer"));
         softAssert.assertTrue(footer.isDisplayed());
+
+        softAssert.assertAll();
 
         //17 Close Browser
         driver.close();
