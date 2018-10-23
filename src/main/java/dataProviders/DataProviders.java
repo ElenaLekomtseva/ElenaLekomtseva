@@ -16,12 +16,12 @@ public class DataProviders {
     @DataProvider(parallel = true)
     public Object[][] benefitBlocksDataProvider() {
         return new Object[][]{
-                {"To include good practices" + "\n" +
+                {0, "To include good practices" + "\n" +
                         "and ideas from successful" + "\n" +
                         "EPAM project"},
-                {"To be flexible and" + "\n" + "customizable"},
-                {"To be multiplatform"},
-                {"Already have good base" + "\n" +
+                {1, "To be flexible and" + "\n" + "customizable"},
+                {2, "To be multiplatform"},
+                {3, "Already have good base" + "\n" +
                         "(about 20 internal and" + "\n" +
                         "some external projects)," + "\n" +
                         "wish to get more…"}

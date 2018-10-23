@@ -7,14 +7,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 public class CheckBenefitBlocksDataProvider {
 
     @Test(dataProvider = "benefitBlocksDataProvider", dataProviderClass = DataProviders.class)
-    public void benefitBlocksTest(String benefitText) {
+    public void benefitBlocksTest(Integer index, String benefitText) {
 
         //0 Open test site by URL
         WebDriver driver = new ChromeDriver();
@@ -25,9 +26,8 @@ public class CheckBenefitBlocksDataProvider {
         driver.navigate().to("https://epam.github.io/JDI/");
 
         //2 asserting 4 texts below 4 pictures
-        WebElement element = driver.findElement(By.xpath("//span[normalize-space(.) = '" +
-                benefitText.replace("\n", "") + "']"));
-        assertTrue(element.isDisplayed());
+        List<WebElement> elements = driver.findElements(By.cssSelector(".benefit-txt"));
+        assertEquals(elements.get(index).getText(), benefitText);
 
         driver.close();
         driver.quit();
