@@ -2,14 +2,9 @@ package pageObjects;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.ArrayList;
-
-import static com.codeborne.selenide.CollectionCondition.*;
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.$;
 
 public class DifferentElementsPageSelenide {
 

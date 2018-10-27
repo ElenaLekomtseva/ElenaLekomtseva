@@ -2,11 +2,9 @@ package pageObjects;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import org.jsoup.select.Collector;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 import static com.codeborne.selenide.CollectionCondition.*;
 import static com.codeborne.selenide.Condition.*;
@@ -92,10 +90,10 @@ public class HomePageSelenide {
         profileButton.shouldHave(text(profileName));
     }
 
-    public void checkMainText() {
-        mainTitle.shouldBe(visible);
-        mainTitle.shouldHave(text("EPA FRAMEWORK WISHES…"));
-    }
+//    public void checkMainText() {
+//        mainTitle.shouldBe(visible);
+//        mainTitle.shouldHave(text("EPA FRAMEWORK WISHES"));
+//    }
 
     public void checkServiceHeaderMenuItems() {
         ArrayList<String> serviceHeaderMenuNameItems = new ArrayList<String>();

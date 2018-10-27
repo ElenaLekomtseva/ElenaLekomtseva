@@ -8,6 +8,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import sun.security.krb5.Config;
 
+import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Selenide.actions;
 
 public class DatesPageSelenide {
@@ -26,6 +27,9 @@ public class DatesPageSelenide {
     @FindBy(css = ".panel-body-list.logs > li")
     private ElementsCollection logs;
 
+    @FindBy(css = ".uui-slider")
+    private SelenideElement slider2;
+
     //====================== methods ======================
 
     private double step = 0;
@@ -42,6 +46,7 @@ public class DatesPageSelenide {
 
     public void setDragAndDropSliderX(int x) {
         int leftXP = Integer.parseInt(leftSliderHandlerText.get(0).text());
+        leftXP += x == leftXP ? 0 : 1;
 
         double offSetX = (x - leftXP) * step;
         WebElement left = leftSliderHandler.get(0).toWebElement();
@@ -53,6 +58,7 @@ public class DatesPageSelenide {
 
     public void setDragAndDropSlidery(int y) {
         int leftYP = Integer.parseInt(leftSliderHandlerText.get(1).text());
+        leftYP += y == leftYP ? 0 : 1;
 
         double offSetY = (y - leftYP) * step;
         WebElement left = leftSliderHandler.get(1).toWebElement();
@@ -61,8 +67,11 @@ public class DatesPageSelenide {
 
     //====================== checks ======================
 
-    public void checkLog() {
-        System.out.println(logs.texts());
+    public void checkFromInLog(Integer from) {
+        logs.findBy(matchText("From")).shouldHave(matchText(from.toString()));
     }
 
+    public void checkToInLog(Integer to) {
+        logs.findBy(matchText("To")).shouldHave(matchText(to.toString()));
+    }
 }

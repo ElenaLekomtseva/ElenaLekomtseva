@@ -42,31 +42,35 @@ public class DatesPageSlidersTestSelenidePageObject extends TestBaseSelenide {
         datesPageSelenide.initSlider();
         datesPageSelenide.setDragAndDropSliderX(0);
         datesPageSelenide.setDragAndDropSlidery(100);
-        datesPageSelenide.checkLog();
 
         //7 Assert that for "From" and "To" sliders there are logs rows with corresponding values
+        datesPageSelenide.checkFromInLog(0);
+        datesPageSelenide.checkToInLog(100);
 
         //8 Using drag-and-drop set Range sliders. left sliders - the most left position,
         // right slider - the most left position: From = 0, To = 0
         datesPageSelenide.setDragAndDropSliderX(0);
         datesPageSelenide.setDragAndDropSlidery(0);
-        datesPageSelenide.checkLog();
 
         //9 Assert that for "From" and "To" sliders there are logs rows with corresponding values
+        datesPageSelenide.checkFromInLog(0);
+        datesPageSelenide.checkToInLog(0);
 
         //10 Using drag-and-drop set Range sliders. left sliders - the most rigth position,
         // right slider - the most rigth position: From = 100, To = 100
         datesPageSelenide.setDragAndDropSliderX(100);
         datesPageSelenide.setDragAndDropSlidery(100);
-        datesPageSelenide.checkLog();
 
         //11 Assert that for "From" and "To" sliders there are logs rows with corresponding values
+        datesPageSelenide.checkFromInLog(100);
+        datesPageSelenide.checkToInLog(100);
 
         //12 Using drag-and-drop set Range sliders: From = 30, To = 70
         datesPageSelenide.setDragAndDropSliderX(30);
         datesPageSelenide.setDragAndDropSlidery(70);
-        datesPageSelenide.checkLog();
 
         //13 Assert that for "From" and "To" sliders there are logs rows with corresponding values
+        datesPageSelenide.checkFromInLog(30);
+        datesPageSelenide.checkToInLog(70);
     }
 }

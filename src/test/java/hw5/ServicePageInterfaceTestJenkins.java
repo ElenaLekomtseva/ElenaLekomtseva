@@ -1,15 +1,16 @@
-package hw4;
+package hw5;
+
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 import base.TestBaseSelenide;
-import org.testng.annotations.Test;
-import org.testng.annotations.*;
 import pageObjects.DifferentElementsPageSelenide;
 import pageObjects.HomePageSelenide;
 
 import static com.codeborne.selenide.Selenide.page;
 import static enums.Users.PITER_CHALOVSKII;
 
-public class ServicePageInterfaceTestSelenidePageObject extends TestBaseSelenide {
+public class ServicePageInterfaceTestJenkins extends TestBaseSelenide {
 
     private HomePageSelenide homePageSelenide;
     private DifferentElementsPageSelenide differentElementsPageSelenide;
