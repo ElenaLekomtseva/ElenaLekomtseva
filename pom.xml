@@ -12,6 +12,7 @@
         <suiteXmlFile>testngJenkins.xml</suiteXmlFile>
         <allure.version>2.6.0</allure.version>
         <aspectj.version>1.8.12</aspectj.version>
+        <driver>chrome</driver>
     </properties>
 
     <dependencies>
@@ -104,6 +105,13 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.7.5</version>
+        </dependency>
+
+        <!--JDI-->
+        <dependency>
+            <groupId>com.epam.jdi</groupId>
+            <artifactId>jdi-uitest-web</artifactId>
+            <version>LATEST</version>
         </dependency>
     </dependencies>
 

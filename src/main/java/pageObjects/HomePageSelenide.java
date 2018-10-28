@@ -2,9 +2,14 @@ package pageObjects;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import enums.HomePageMenu;
+import enums.ServiceMenu;
+import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.codeborne.selenide.CollectionCondition.*;
 import static com.codeborne.selenide.Condition.*;
@@ -31,30 +36,26 @@ public class HomePageSelenide {
     @FindBy(css = "h3.main-title")
     private SelenideElement mainTitle;
 
-    @FindBy(xpath = "//*[@class = 'dropdown-toggle' and contains(text(),'Service')]")
-    private SelenideElement serviceHeaderMenu;
+    @FindBy(css = ".uui-navigation.m-l8 > li")
+    private ElementsCollection headerMenu;
 
     @FindBy(css = ".dropdown-menu > li > a")
-    private ElementsCollection serviceHeaderMenuItems;
+    private ElementsCollection dropdownServiceHeaderMenu;
 
-    @FindBy(xpath = "//*[@class = 'sidebar-menu']//span[text() = 'Service']/parent::*")
-    private SelenideElement serviceSidebarMenu;
+    @FindBy(css = ".sidebar-menu > li")
+    private ElementsCollection siderbarMenu;
 
     @FindBy(xpath = "//*[@class = 'sidebar-menu']//span[text() = 'Service']/../..//li[@ui = 'label']/a")
-    private ElementsCollection serviceSidebarMenuItems;
-
-    @FindBy(xpath = "//*[@class = 'dropdown-menu']/li/a[text() = 'Different elements']")
-    private SelenideElement differentElementsHeaderMenu;
-
-    @FindBy(xpath = "//*[@class = 'dropdown-menu']/li/a[text() = 'Dates']")
-    private SelenideElement datesHeaderMenu;
+    private ElementsCollection dropdownServiceSidebarMenu;
 
     //====================== methods ======================
 
-    public void openPage() {
+    @Step
+    public void openHomePage() {
         open("https://epam.github.io/JDI/index.html");
     }
 
+    @Step
     public void login(String login, String password) {
         profileButton.click();
         this.login.sendKeys(login);
@@ -62,64 +63,47 @@ public class HomePageSelenide {
         submit.click();
     }
 
-    public void clickServiceHeaderMenu() {
-        serviceHeaderMenu.click();
+    @Step
+    public void clickHeaderMenu(HomePageMenu item) {
+        headerMenu.get(item.getIndex()).click();
     }
 
-    public void clickServiceSidebarMenu() {
-        serviceSidebarMenu.click();
+    @Step
+    public void clickSidebarMenu(HomePageMenu item) {
+        siderbarMenu.get(item.getIndex()).click();
     }
 
-    public void clickDifferentElementsHeaderMenu() {
-        this.clickServiceHeaderMenu();
-        differentElementsHeaderMenu.click();
-    }
-
-    public void clickDatesHeaderMenu() {
-        this.clickServiceHeaderMenu();
-        datesHeaderMenu.click();
+    @Step
+    public void clickServiceHeaderMenu(ServiceMenu item) {
+        dropdownServiceHeaderMenu.get(item.getIndex()).click();
     }
 
     //====================== checks ======================
 
+    @Step
     public void checkTitle() {
         assertEquals(getWebDriver().getTitle(), "Home Page");
     }
 
+    @Step
     public void checkProfileName(String profileName) {
         profileButton.shouldHave(text(profileName));
     }
 
-//    public void checkMainText() {
-//        mainTitle.shouldBe(visible);
-//        mainTitle.shouldHave(text("EPA FRAMEWORK WISHES"));
-//    }
-
-    public void checkServiceHeaderMenuItems() {
-        ArrayList<String> serviceHeaderMenuNameItems = new ArrayList<String>();
-        serviceHeaderMenuNameItems.add("SUPPORT");
-        serviceHeaderMenuNameItems.add("DATES");
-        serviceHeaderMenuNameItems.add("COMPLEX TABLE");
-        serviceHeaderMenuNameItems.add("SIMPLE TABLE");
-        serviceHeaderMenuNameItems.add("USER TABLE");
-        serviceHeaderMenuNameItems.add("TABLE WITH PAGES");
-        serviceHeaderMenuNameItems.add("DIFFERENT ELEMENTS");
-        serviceHeaderMenuNameItems.add("PERFORMANCE");
-
-        serviceHeaderMenuItems.shouldHave(texts(serviceHeaderMenuNameItems));
+    @Step
+    public void checkServiceHeaderMenu() {
+        List<String> serviceMenuValues = Stream.of(enums.ServiceMenu.values())
+                .map(Enum::toString)
+                .map(String::toUpperCase)
+                .collect(Collectors.toList());
+        dropdownServiceHeaderMenu.shouldHave(texts(serviceMenuValues));
     }
 
-    public void checkServiceSidebarMenuItems() {
-        ArrayList<String> serviceSiderBarMenuNameItems = new ArrayList<String>();
-        serviceSiderBarMenuNameItems.add("Support");
-        serviceSiderBarMenuNameItems.add("Dates");
-        serviceSiderBarMenuNameItems.add("Complex Table");
-        serviceSiderBarMenuNameItems.add("Simple Table");
-        serviceSiderBarMenuNameItems.add("User Table");
-        serviceSiderBarMenuNameItems.add("Table with pages");
-        serviceSiderBarMenuNameItems.add("Different elements");
-        serviceSiderBarMenuNameItems.add("Performance");
-
-        serviceSidebarMenuItems.shouldHave(texts(serviceSiderBarMenuNameItems));
+    @Step
+    public void checkServiceSidebarMenu() {
+        List<String> serviceMenuValues = Stream.of(enums.ServiceMenu.values())
+                .map(Enum::toString)
+                .collect(Collectors.toList());
+        dropdownServiceSidebarMenu.shouldHave(texts(serviceMenuValues));
     }
 }

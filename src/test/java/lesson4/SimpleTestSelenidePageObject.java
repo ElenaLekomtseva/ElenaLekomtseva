@@ -1,10 +1,8 @@
 package lesson4;
 
 import base.TestBaseSelenide;
-import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.By;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pageObjects.HomePageSelenide;
@@ -28,7 +26,7 @@ public class SimpleTestSelenidePageObject extends TestBaseSelenide {
         setProperty("webdriver.chrome.driver", "src\\main\\resources\\chromedriver.exe");
 
         //2 Navigate
-        homePageSelenide.openPage();
+        homePageSelenide.openHomePage();
 
         //3 Assert Title
         assertEquals(getWebDriver().getTitle(), "Home Page");

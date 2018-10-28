@@ -2,6 +2,10 @@ package pageObjects;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import enums.Colors;
+import enums.Metals;
+import enums.NatureForces;
+import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
 
 import static com.codeborne.selenide.Condition.*;
@@ -13,26 +17,11 @@ public class DifferentElementsPageSelenide {
     @FindBy(css = "label.label-checkbox")
     private ElementsCollection checkboxs;
 
-    @FindBy(xpath = "//label[@class = 'label-checkbox' and contains(., 'Water')]")
-    private SelenideElement checkboxWater;
-
-    @FindBy(xpath = "//label[@class = 'label-checkbox' and contains(., 'Wind')]")
-    private SelenideElement checkboxWind;
-
     @FindBy(css = "label.label-radio")
     private ElementsCollection radios;
 
-    @FindBy(css = "[name = 'metal']")
-    private SelenideElement metalRadio;
-
-    @FindBy(xpath = "//label[@class = 'label-radio' and contains(., 'Selen')]")
-    private SelenideElement radioSelen;
-
     @FindBy(css = "select.uui-form-element")
     private SelenideElement dropdown;
-
-    @FindBy(xpath = "//div[@class = 'colors']/select/option[text() = 'Yellow']")
-    private SelenideElement dropdownYellow;
 
     @FindBy(css = ".uui-button:not(.btn-login)")
     private ElementsCollection buttons;
@@ -48,57 +37,65 @@ public class DifferentElementsPageSelenide {
 
     //====================== methods ======================
 
-    public void clickCheckBoxWater() {
-        checkboxWater.click();
+    @Step
+    public void clickCheckBox(NatureForces item) {
+        checkboxs.get(item.getIndex()).click();
     }
 
-    public void clickCheckBoxWind() {
-        checkboxWind.click();
+    @Step
+    public void clickRadio(Metals item) {
+        radios.get(item.getIndex()).click();
     }
 
-    public void clickRadioSelen() {
-        radioSelen.click();
-    }
-
-    public void selectColor(String color) {
-        dropdown.selectOption(color);
+    @Step
+    public void selectColor(Colors item) {
+        dropdown.selectOption(item.toString());
     }
 
     //====================== checks ======================
 
+    @Step
     public void checkCheckbox() {
         checkboxs.shouldHaveSize(4);
     }
 
+    @Step
     public void checkRadio() {
         radios.shouldHaveSize(4);
     }
 
+    @Step
     public void checkDropdown() {
         dropdown.shouldBe(visible);
     }
 
+    @Step
     public void checkButtons() {
         buttons.shouldHaveSize(2);
     }
 
+    @Step
     public void checkLeftSidebar() {
         leftSidebar.shouldBe(visible);
     }
 
+    @Step
     public void checkRightSidebar() {
         rightSidebar.shouldBe(visible);
     }
 
-    public void checkLogCheckbox(String item, Boolean exists) {
-        logs.findBy(matchText(item)).shouldHave(matchText(exists.toString()));
+    @Step
+    public void checkLogCheckbox(NatureForces item, Boolean exists) {
+        logs.findBy(matchText(item.getValue())).shouldHave(matchText(exists.toString()));
     }
 
-    public void checkLogRadio(String metal) {
-        logs.findBy(matchText("metal")).shouldHave(matchText(metal));
+    @Step
+    public void checkLogRadio(Metals item) {
+        logs.findBy(matchText("metal")).shouldHave(matchText(item.getValue()));
     }
 
-    public void checkLogDropDown(String color) {
-        logs.findBy(matchText("Colors")).shouldHave(matchText(color));
+    @Step
+    public void checkLogDropDown(Colors item) {
+        logs.findBy(matchText("Colors")).shouldHave(matchText(item.toString()));
     }
 }

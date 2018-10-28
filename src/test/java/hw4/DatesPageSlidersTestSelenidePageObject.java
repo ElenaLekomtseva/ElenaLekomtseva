@@ -1,6 +1,8 @@
 package hw4;
 
 import base.TestBaseSelenide;
+import enums.HomePageMenu;
+import enums.ServiceMenu;
 import org.testng.annotations.*;
 import pageObjects.DatesPageSelenide;
 import pageObjects.HomePageSelenide;
@@ -23,7 +25,7 @@ public class DatesPageSlidersTestSelenidePageObject extends TestBaseSelenide {
     public void simpleTest() {
 
         //1 Navigate
-        homePageSelenide.openPage();
+        homePageSelenide.openHomePage();
 
         //2 Assert Title
         homePageSelenide.checkTitle();
@@ -35,42 +37,36 @@ public class DatesPageSlidersTestSelenidePageObject extends TestBaseSelenide {
         homePageSelenide.checkProfileName(PITER_CHALOVSKII.profileName);
 
         //5 Open through the header menu Service -> Dates Page
-        homePageSelenide.clickDatesHeaderMenu();
+        //7 Open through the header menu Service -> Different Elements Page
+        homePageSelenide.clickHeaderMenu(HomePageMenu.SERVICE);
+        homePageSelenide.clickServiceHeaderMenu(ServiceMenu.DATES);
 
         //6 Using drag-and-drop set Range sliders. left sliders - the most left position,
         // right slider - the most rigth position: From = 0, To = 100
-        datesPageSelenide.initSlider();
-        datesPageSelenide.setDragAndDropSliderX(0);
-        datesPageSelenide.setDragAndDropSlidery(100);
+        datesPageSelenide.setDragAndDropSlider(0, 100);
 
         //7 Assert that for "From" and "To" sliders there are logs rows with corresponding values
-        datesPageSelenide.checkFromInLog(0);
-        datesPageSelenide.checkToInLog(100);
+        datesPageSelenide.checkLog(0, 100);
 
         //8 Using drag-and-drop set Range sliders. left sliders - the most left position,
         // right slider - the most left position: From = 0, To = 0
-        datesPageSelenide.setDragAndDropSliderX(0);
-        datesPageSelenide.setDragAndDropSlidery(0);
+        datesPageSelenide.setDragAndDropSlider(0, 0);
 
         //9 Assert that for "From" and "To" sliders there are logs rows with corresponding values
-        datesPageSelenide.checkFromInLog(0);
-        datesPageSelenide.checkToInLog(0);
+        datesPageSelenide.checkLog(0, 0);
 
         //10 Using drag-and-drop set Range sliders. left sliders - the most rigth position,
         // right slider - the most rigth position: From = 100, To = 100
-        datesPageSelenide.setDragAndDropSliderX(100);
-        datesPageSelenide.setDragAndDropSlidery(100);
+        datesPageSelenide.setDragAndDropSlider(100, 100);
 
         //11 Assert that for "From" and "To" sliders there are logs rows with corresponding values
-        datesPageSelenide.checkFromInLog(100);
-        datesPageSelenide.checkToInLog(100);
+        // error
+        datesPageSelenide.checkLog(100, 100);
 
         //12 Using drag-and-drop set Range sliders: From = 30, To = 70
-        datesPageSelenide.setDragAndDropSliderX(30);
-        datesPageSelenide.setDragAndDropSlidery(70);
+        datesPageSelenide.setDragAndDropSlider(30, 70);
 
         //13 Assert that for "From" and "To" sliders there are logs rows with corresponding values
-        datesPageSelenide.checkFromInLog(30);
-        datesPageSelenide.checkToInLog(70);
+        datesPageSelenide.checkLog(30, 70);
     }
 }
