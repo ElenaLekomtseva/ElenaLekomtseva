@@ -28,13 +28,18 @@ public class DatesPageSelenide {
 
     private void moveHandler(SelenideElement handler, double position) {
         double currentPosition = Double.parseDouble(handler.text());
-        double offset = (position - currentPosition + (position  <= currentPosition ? -1 : 0)) * getStep();
+        double offset = (position - currentPosition -1) * getStep();
         actions().dragAndDropBy(handler.toWebElement(), (int) offset, 0).perform();
     }
 
     public void setDragAndDropSlider(double from, double to) {
-        moveHandler(sliderHandlers.get(0), from);
-        moveHandler(sliderHandlers.get(1), to);
+        if (sliderHandlers.get(0).getLocation().x != sliderHandlers.get(1).getLocation().x) {
+            moveHandler(sliderHandlers.get(0), from);
+            moveHandler(sliderHandlers.get(1), to);
+        } else {
+            moveHandler(sliderHandlers.get(1), to);
+            moveHandler(sliderHandlers.get(0), from);
+        }
     }
 
     //====================== checks ======================
