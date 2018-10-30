@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Selenide.actions;
 
-public class DatesPageSelenide {
+public class DatesPageSelenide extends AbstractPageSelenide {
 
     //====================== fields ======================
 
@@ -28,7 +28,7 @@ public class DatesPageSelenide {
 
     private void moveHandler(SelenideElement handler, double position) {
         double currentPosition = Double.parseDouble(handler.text());
-        double offset = (position - currentPosition -1) * getStep();
+        double offset = (position - currentPosition - 1) * getStep();
         actions().dragAndDropBy(handler.toWebElement(), (int) offset, 0).perform();
     }
 

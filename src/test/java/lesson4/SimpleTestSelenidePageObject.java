@@ -3,6 +3,7 @@ package lesson4;
 import base.TestBaseSelenide;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import enums.Users;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pageObjects.HomePageSelenide;
@@ -31,7 +32,7 @@ public class SimpleTestSelenidePageObject extends TestBaseSelenide {
         //3 Assert Title
         assertEquals(getWebDriver().getTitle(), "Home Page");
 
-        homePageSelenide.login("epam", "1234");
+        homePageSelenide.login(Users.PITER_CHALOVSKII);
 
         //4 Login
         $(".profile-photo").click();

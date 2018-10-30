@@ -8,5 +8,6 @@ public class TestBaseSelenide {
     @BeforeSuite
     public void beforeSuite() {
         Configuration.browser = "CHROME";
+        Configuration.startMaximized = true;
     }
 }

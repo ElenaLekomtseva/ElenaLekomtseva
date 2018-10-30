@@ -14,10 +14,8 @@ import java.util.stream.Stream;
 import static com.codeborne.selenide.CollectionCondition.*;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
-import static org.testng.Assert.assertEquals;
 
-public class HomePageSelenide {
+public class HomePageSelenide extends AbstractPageSelenide {
 
     //====================== fields ======================
 
@@ -56,10 +54,10 @@ public class HomePageSelenide {
     }
 
     @Step
-    public void login(String login, String password) {
+    public void login(enums.Users user) {
         profileButton.click();
-        this.login.sendKeys(login);
-        this.password.sendKeys(password);
+        this.login.sendKeys(user.login);
+        this.password.sendKeys(user.password);
         submit.click();
     }
 
@@ -79,11 +77,6 @@ public class HomePageSelenide {
     }
 
     //====================== checks ======================
-
-    @Step
-    public void checkTitle() {
-        assertEquals(getWebDriver().getTitle(), "Home Page");
-    }
 
     @Step
     public void checkProfileName(String profileName) {

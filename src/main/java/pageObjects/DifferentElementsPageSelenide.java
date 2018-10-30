@@ -10,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 
 import static com.codeborne.selenide.Condition.*;
 
-public class DifferentElementsPageSelenide {
+public class DifferentElementsPageSelenide extends AbstractPageSelenide {
 
     //====================== fields ======================
 
@@ -38,8 +38,10 @@ public class DifferentElementsPageSelenide {
     //====================== methods ======================
 
     @Step
-    public void clickCheckBox(NatureForces item) {
-        checkboxs.get(item.getIndex()).click();
+    public void clickCheckBox(NatureForces... items) {
+        for (NatureForces item : items) {
+            checkboxs.get(item.getIndex()).click();
+        }
     }
 
     @Step
@@ -55,13 +57,21 @@ public class DifferentElementsPageSelenide {
     //====================== checks ======================
 
     @Step
-    public void checkCheckbox() {
-        checkboxs.shouldHaveSize(4);
+    public void checkCheckbox(int size) {
+        checkboxs.shouldHaveSize(size);
+
+        for (SelenideElement checkbox : checkboxs) {
+            checkbox.shouldBe(visible);
+        }
     }
 
     @Step
-    public void checkRadio() {
-        radios.shouldHaveSize(4);
+    public void checkRadio(int size) {
+        radios.shouldHaveSize(size);
+
+        for (SelenideElement radio : radios) {
+            radio.shouldBe(visible);
+        }
     }
 
     @Step
@@ -70,8 +80,12 @@ public class DifferentElementsPageSelenide {
     }
 
     @Step
-    public void checkButtons() {
-        buttons.shouldHaveSize(2);
+    public void checkButtons(int size) {
+        buttons.shouldHaveSize(size);
+
+        for (SelenideElement button : buttons) {
+            button.shouldBe(visible);
+        }
     }
 
     @Step
