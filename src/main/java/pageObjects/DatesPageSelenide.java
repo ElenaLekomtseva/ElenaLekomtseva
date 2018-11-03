@@ -27,8 +27,9 @@ public class DatesPageSelenide extends AbstractPageSelenide {
     }
 
     private void moveHandler(SelenideElement handler, double position) {
-        double currentPosition = Double.parseDouble(handler.text());
-        double offset = (position - currentPosition - 1) * getStep();
+        double factor = 1;
+        double currentPosition = Double.parseDouble(handler.text()) + factor;
+        double offset = (position - currentPosition) * getStep();
         actions().dragAndDropBy(handler.toWebElement(), (int) offset, 0).perform();
     }
 
