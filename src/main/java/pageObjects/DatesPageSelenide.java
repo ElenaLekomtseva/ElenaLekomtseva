@@ -35,7 +35,7 @@ public class DatesPageSelenide extends AbstractPageSelenide {
     }
 
     public void setDragAndDropSlider(double from, double to) {
-        if (sliderHandlers.get(0).getLocation().x != sliderHandlers.get(1).getLocation().x) {
+        if (from <= Double.parseDouble(sliderHandlers.get(0).text())) {
             moveHandler(sliderHandlers.get(0), from);
             moveHandler(sliderHandlers.get(1), to);
         } else {
