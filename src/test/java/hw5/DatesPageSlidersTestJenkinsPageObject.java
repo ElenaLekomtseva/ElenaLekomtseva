@@ -2,6 +2,7 @@ package hw5;
 
 import base.TestBaseSelenide;
 import io.qameta.allure.Feature;
+import io.qameta.allure.Issue;
 import io.qameta.allure.Story;
 import listeners.AllureAttachmentListener;
 import org.testng.annotations.BeforeClass;
@@ -30,6 +31,7 @@ public class DatesPageSlidersTestJenkinsPageObject extends TestBaseSelenide {
         datesPageSelenide = page(DatesPageSelenide.class);
     }
 
+    @Issue("Bug checkLog(30, 70)")
     @Test
     public void simpleTest() {
 
@@ -77,6 +79,6 @@ public class DatesPageSlidersTestJenkinsPageObject extends TestBaseSelenide {
         datesPageSelenide.setDragAndDropSlider(30, 70);
 
         //13 Assert that for "From" and "To" sliders there are logs rows with corresponding values
-//        datesPageSelenide.checkLog(30, 70);
+        datesPageSelenide.checkLog(30, 70);
     }
 }

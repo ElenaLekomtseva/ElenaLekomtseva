@@ -4,6 +4,7 @@ import base.TestBaseSelenide;
 import enums.Metals;
 import enums.NatureForces;
 import io.qameta.allure.Feature;
+import io.qameta.allure.Issue;
 import io.qameta.allure.Story;
 import listeners.AllureAttachmentListener;
 import org.testng.annotations.BeforeClass;
@@ -13,6 +14,7 @@ import pageObjects.DifferentElementsPageSelenide;
 import pageObjects.HomePageSelenide;
 
 import static com.codeborne.selenide.Selenide.page;
+import static enums.Colors.RED;
 import static enums.Colors.YELLOW;
 import static enums.HomePageMenu.HOME;
 import static enums.HomePageMenu.SERVICE;
@@ -30,6 +32,7 @@ public class ServicePageInterfaceFailedTestJenkins extends TestBaseSelenide {
     private HomePageSelenide homePageSelenide;
     private DifferentElementsPageSelenide differentElementsPageSelenide;
 
+    @Issue("bug checkLogDropDown(RED)")
     @BeforeClass
     public void beforeClass() {
         homePageSelenide = page(HomePageSelenide.class);
@@ -94,7 +97,7 @@ public class ServicePageInterfaceFailedTestJenkins extends TestBaseSelenide {
         differentElementsPageSelenide.selectColor(YELLOW);
 
         //16 Assert that for dropdown there is a log row and value is corresponded to the selected value. 
-        differentElementsPageSelenide.checkLogDropDown(YELLOW);
+        differentElementsPageSelenide.checkLogDropDown(RED);
 
         //17 Unselect and assert checkboxes
         differentElementsPageSelenide.clickCheckBox(WATER, WIND);
