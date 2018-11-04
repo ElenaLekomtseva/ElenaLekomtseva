@@ -1,29 +1,31 @@
 package hw5;
 
-import enums.*;
+import base.TestBaseSelenide;
+import enums.Metals;
+import enums.NatureForces;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import listeners.AllureAttachmentListener;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
-import base.TestBaseSelenide;
 import pageObjects.DifferentElementsPageSelenide;
 import pageObjects.HomePageSelenide;
 
 import static com.codeborne.selenide.Selenide.page;
-import static enums.Colors.*;
-import static enums.HomePageMenu.*;
-import static enums.Metals.*;
-import static enums.NatureForces.*;
-import static enums.ServiceMenu.*;
+import static enums.Colors.YELLOW;
+import static enums.HomePageMenu.HOME;
+import static enums.HomePageMenu.SERVICE;
+import static enums.Metals.SELEN;
+import static enums.NatureForces.WATER;
+import static enums.NatureForces.WIND;
+import static enums.ServiceMenu.DIFFERENT_ELEMENTS;
 import static enums.Users.PITER_CHALOVSKII;
 
 @Feature("Allure and Jenkins tests")
-@Story("Service page interface test")
+@Story("Service page interface failed test")
 @Listeners(AllureAttachmentListener.class)
-public class ServicePageInterfaceTestJenkins extends TestBaseSelenide {
+public class ServicePageInterfaceFailedTestJenkins extends TestBaseSelenide {
 
     private HomePageSelenide homePageSelenide;
     private DifferentElementsPageSelenide differentElementsPageSelenide;

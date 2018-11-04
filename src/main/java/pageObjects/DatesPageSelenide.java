@@ -2,6 +2,7 @@ package pageObjects;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
 
 import static com.codeborne.selenide.Condition.matchText;
@@ -22,10 +23,12 @@ public class DatesPageSelenide extends AbstractPageSelenide {
 
     //====================== methods ======================
 
+    @Step
     private double getStep() {
         return (double) slider.getSize().width / 100.0;
     }
 
+    @Step
     private void moveHandler(SelenideElement handler, double position) {
         double currentPosition = Double.parseDouble(handler.text());
         double factor = currentPosition >= position ? 1 : 0;
@@ -34,6 +37,7 @@ public class DatesPageSelenide extends AbstractPageSelenide {
         actions().dragAndDropBy(handler.toWebElement(), (int) offset, 0).perform();
     }
 
+    @Step
     public void setDragAndDropSlider(double from, double to) {
         if (from <= Double.parseDouble(sliderHandlers.get(0).text())) {
             moveHandler(sliderHandlers.get(0), from);
