@@ -2,14 +2,9 @@
 
 <suite name="Cucumber Suite" >
     <test name="Cucumber Tests"   >
-        <groups>
-            <run>
-                <include name="Group1" />
-            </run>
-        </groups>
-
         <classes>
-            <class name="lesson2.SimpleTest" />
+            <!--class name="runners.CucumberTestngRunner" /-->
+            <class name="runners.CucumberHW6Runner"></class>
         </classes>
     </test>
 </suite>
