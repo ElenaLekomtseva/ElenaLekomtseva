@@ -82,6 +82,12 @@ public class BasePageSelenide {
         dropdownServiceHeaderMenu.get(ServiceMenu.valueOf(dropdownServiceHeaderMenuItem).getIndex()).click();
     }
 
+    @Step
+    @When("I click on \"(.*)\" sidebar")
+    public void checkServiceSidebarMenu(String homePageSiderbarMenuItem) {
+        siderbarMenu.get(HomePageMenu.valueOf(homePageSiderbarMenuItem).getIndex()).click();
+    }
+
     //====================== checks ======================
 
     @Step
@@ -103,14 +109,6 @@ public class BasePageSelenide {
                 .map(String::toUpperCase)
                 .collect(Collectors.toList());
         dropdownServiceHeaderMenu.shouldHave(texts(serviceMenuValues));
-    }
-
-    @Step
-    public void checkServiceSidebarMenu() {
-        List<String> serviceMenuValues = Stream.of(enums.ServiceMenu.values())
-                .map(Enum::toString)
-                .collect(Collectors.toList());
-        dropdownServiceSidebarMenu.shouldHave(texts(serviceMenuValues));
     }
 
 }

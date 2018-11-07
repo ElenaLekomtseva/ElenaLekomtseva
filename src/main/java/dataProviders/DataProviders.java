@@ -3,12 +3,19 @@ package dataProviders;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
+import enums.Metals;
 import org.testng.annotations.DataProvider;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 public class DataProviders {
@@ -48,13 +55,13 @@ public class DataProviders {
             e.printStackTrace();
         }
 
-        JsonObject jsonObject = new JsonParser().parse(contentBuilder.toString()).getAsJsonObject();
-        Object[][] result = new Object[jsonObject.size()][1];
-        for (int i = 0; i < jsonObject.size(); i++) {
-            result[i][0] = new Gson()
-                    .fromJson(jsonObject.getAsJsonObject("data_" + (i + 1)).toString(), MetalsAndColorsData.class);
+        Type rows = new TypeToken<HashMap<String, MetalsAndColorsData>>() {}.getType();
+        Map<String, MetalsAndColorsData> rowData = new Gson().fromJson(contentBuilder.toString(), rows);
+        Object[][] dataArray = new Object[rowData.size()][1];
+        int i = 0;
+        for (Map.Entry entry: rowData.entrySet()) {
+            dataArray[i++][0] = entry.getValue();
         }
-
-        return result;
+        return dataArray;
     }
 }

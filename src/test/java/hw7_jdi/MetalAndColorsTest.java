@@ -37,12 +37,13 @@ public class MetalAndColorsTest extends TestNGBase {
         metalsColorsPage.checkOpened();
 
         //3 Fill form Metals & Colors by data below
-        metalsColorsPage.fillData(data);
+        metalsColorsPage.metalsColorsElementsForm.fill(data);
 
         //Submit form Metals & Colors
-        metalsColorsPage.submit();
+        metalsColorsPage.metalsColorsElementsForm.submit();
 
         //4 Result sections should contains data  below
-        checkFillResult(metalsColorsPage.getExpectedResult(data));
+        metalsColorsPage.resultInfoPanel
+                .checkFillResult(metalsColorsPage.metalsColorsElementsForm.getExpectedResult(data));
     }
 }

@@ -10,7 +10,6 @@ import pageObjects.UseJDI.sections.Header;
 import pageObjects.UseJDI.sections.LoginForm;
 import pageObjects.UseJDI.pages.HomePage;
 import org.openqa.selenium.support.FindBy;
-import pageObjects.UseJDI.sections.ResultInfoPanel;
 import org.testng.Assert;
 
 import java.util.List;
@@ -25,7 +24,6 @@ public class EpamSite extends WebSite {
 
     public static LoginForm loginForm;
     public static Header header;
-    public static ResultInfoPanel resultInfoPanel;
 
     @FindBy(css = ".profile-photo")
     private static Label profilePhoto;
@@ -42,9 +40,4 @@ public class EpamSite extends WebSite {
         header.headerMenu.select(item);
     }
 
-    //====================== checks ======================
-
-    public static void checkFillResult(List<String> expectedValue) {
-        Assert.assertEquals(expectedValue, resultInfoPanel.result.getTextList());
-    }
 }

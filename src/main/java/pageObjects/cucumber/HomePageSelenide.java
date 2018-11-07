@@ -29,7 +29,14 @@ public class HomePageSelenide {
     @FindBy(css = "h3.main-title")
     private SelenideElement mainTitle;
 
+    @FindBy(css = "div.benefit-icon")
+    private ElementsCollection benefitsElements;
+
+    @FindBy(css = ".benefit-txt")
+    private ElementsCollection textUnderBenefitsElements;
+
     public BasePageSelenide basePage = new BasePageSelenide();
+
     public HomePageSelenide() {
         page(this);
     }
@@ -43,5 +50,15 @@ public class HomePageSelenide {
     }
 
     //====================== checks ======================
+
+    @And("(\\d+) pictures are displayed on Home page")
+    public void picturesAreDisplayedOnHomePage(int count) {
+        benefitsElements.shouldHaveSize(count);
+    }
+
+    @And("(\\d+) text under pictures are displayed on Home page")
+    public void textUnderPicturesAreDisplayedOnHomePage(int count) {
+        benefitsElements.shouldHaveSize(count);
+    }
 
 }
