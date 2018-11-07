@@ -55,6 +55,7 @@ public class MetalsColorsPage extends WebPage {
 
     //====================== methods ======================
 
+    // TODO This will be better with the Form<MetalsAndColorsData>
     public void fillData(MetalsAndColorsData data) {
         //summary
         if (data.summary.size() > 0) {

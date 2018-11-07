@@ -48,6 +48,7 @@ public class DataProviders {
             e.printStackTrace();
         }
 
+        // TODO Take a look on TypeToken
         JsonObject jsonObject = new JsonParser().parse(contentBuilder.toString()).getAsJsonObject();
         Object[][] result = new Object[jsonObject.size()][1];
         for (int i = 0; i < jsonObject.size(); i++) {
