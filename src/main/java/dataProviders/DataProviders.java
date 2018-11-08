@@ -4,9 +4,12 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
+import cucumber.runtime.io.ResourceLoader;
 import enums.Metals;
 import org.testng.annotations.DataProvider;
 
+import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
@@ -54,6 +57,7 @@ public class DataProviders {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        //JsonReader jsonReader = new JsonReader(new FileReader("\\src\\test\\resources\\JDI_ex8_metalsColorsDataSet.json"));
 
         Type rows = new TypeToken<HashMap<String, MetalsAndColorsData>>() {}.getType();
         Map<String, MetalsAndColorsData> rowData = new Gson().fromJson(contentBuilder.toString(), rows);

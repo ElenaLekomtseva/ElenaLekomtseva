@@ -38,6 +38,7 @@ public class ServicePageInterfaceFailedTestJenkins extends TestBaseSelenide {
         differentElementsPageSelenide = page(DifferentElementsPageSelenide.class);
     }
 
+    @Issue("bug not find WIND in log")
     @Test
     public void simpleTest() {
 
@@ -96,7 +97,7 @@ public class ServicePageInterfaceFailedTestJenkins extends TestBaseSelenide {
         differentElementsPageSelenide.selectColor(YELLOW);
 
         //16 Assert that for dropdown there is a log row and value is corresponded to the selected value. 
-        differentElementsPageSelenide.checkLogDropDown(RED);
+        differentElementsPageSelenide.checkLogDropDown(YELLOW);
 
         //17 Unselect and assert checkboxes
         differentElementsPageSelenide.clickCheckBox(WATER, WIND);
@@ -104,6 +105,6 @@ public class ServicePageInterfaceFailedTestJenkins extends TestBaseSelenide {
         //18 Assert that for each checkbox there is an individual log row and value is corresponded to
         // the status of checkbox. checkbox
         differentElementsPageSelenide.checkLogCheckbox(WATER, false);
-        differentElementsPageSelenide.checkLogCheckbox(WIND, false);
+        differentElementsPageSelenide.checkLogCheckbox(WIND, true);
     }
 }
