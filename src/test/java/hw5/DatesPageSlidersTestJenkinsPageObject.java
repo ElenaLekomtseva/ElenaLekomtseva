@@ -31,7 +31,6 @@ public class DatesPageSlidersTestJenkinsPageObject extends TestBaseSelenide {
         datesPageSelenide = page(DatesPageSelenide.class);
     }
 
-    @Issue("Bug checkLog(30, 70)")
     @Test
     public void simpleTest() {
 

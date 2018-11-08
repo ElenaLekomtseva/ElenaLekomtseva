@@ -32,7 +32,6 @@ public class ServicePageInterfaceFailedTestJenkins extends TestBaseSelenide {
     private HomePageSelenide homePageSelenide;
     private DifferentElementsPageSelenide differentElementsPageSelenide;
 
-    @Issue("bug checkLogDropDown(RED)")
     @BeforeClass
     public void beforeClass() {
         homePageSelenide = page(HomePageSelenide.class);

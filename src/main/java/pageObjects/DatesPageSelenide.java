@@ -50,6 +50,7 @@ public class DatesPageSelenide extends AbstractPageSelenide {
 
     //====================== checks ======================
 
+    @Step
     public void checkLog(Integer from, Integer to) {
         logs.findBy(matchText("From")).shouldHave(matchText(from.toString()));
         logs.findBy(matchText("To")).shouldHave(matchText(to.toString()));
