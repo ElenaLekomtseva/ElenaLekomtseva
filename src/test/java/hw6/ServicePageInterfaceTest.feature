@@ -41,7 +41,6 @@ Feature: Home Page tests
     And Right section is displayed
     And Left section is displayed
 
-    # When Select checkboxes Water, Wind
     When Select checkboxes
       | Water |
       | Wind  |
