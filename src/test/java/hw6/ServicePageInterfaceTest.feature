@@ -41,8 +41,12 @@ Feature: Home Page tests
     And Right section is displayed
     And Left section is displayed
 
-    When Select checkboxes Water, Wind
-    Then Log rows are displayed, checkbox name and its status true is corresponding to Water, Wind
+    When Select checkboxes
+      | Water |
+      | Wind  |
+    Then Log rows are displayed, checkbox name and its status true is corresponding to values
+      | Water |
+      | Wind  |
 
     When Select radio Selen
     Then Log row is displayed, radiobutton name and selected Selen
@@ -50,5 +54,9 @@ Feature: Home Page tests
     When Select in dropdown Yellow
     Then Log row is displayed, dropdown name and selected Yellow
 
-    When Unselect checkboxes Water, Wind
-    Then Log rows are displayed, checkbox name and its status false is corresponding to Water, Wind
+    When Unselect checkboxes
+      | Water |
+      | Wind  |
+    Then Log rows are displayed, checkbox name and its status false is corresponding to values
+      | Water |
+      | Wind  |
