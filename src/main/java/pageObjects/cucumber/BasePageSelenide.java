@@ -2,7 +2,6 @@ package pageObjects.cucumber;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import cucumber.api.Transpose;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -99,13 +98,13 @@ public class BasePageSelenide {
 
     @Step
     @Then("\"Service\" subcategory in the header contains options:")
-    public void checkServiceHeaderMenu(@Transpose List<String> options) {
+    public void checkServiceHeaderMenu(List<String> options) {
         dropdownServiceHeaderMenu.shouldHave(texts(options));
     }
 
     @Step
     @Then("\"Service\" subcategory in the siderbar contains options:")
-    public void checkServiceSidebarMenu(@Transpose List<String> options) {
+    public void checkServiceSidebarMenu(List<String> options) {
         dropdownServiceSidebarMenu.shouldHave(texts(options));
     }
 }

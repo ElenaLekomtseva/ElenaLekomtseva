@@ -2,7 +2,6 @@ package pageObjects.cucumber;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import cucumber.api.Transpose;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -48,7 +47,7 @@ public class DifferentElementsPageSelenide {
 
     @Step
     @When("(Select|Unselect) checkboxes")
-    public void clickCheckBox(@Transpose List<String> values) {
+    public void clickCheckBox(List<String> values) {
         for (String value : values) {
             checkboxs.find(text(value)).click();
         }
@@ -106,7 +105,7 @@ public class DifferentElementsPageSelenide {
 
     @Step
     @Then("Log rows are displayed, checkbox name and its status (.+) is corresponding to values")
-    public void checkLogCheckbox(String exists, @Transpose List<String> values) {
+    public void checkLogCheckbox(String exists, List<String> values) {
         for (String value : values) {
             logs.findBy(matchText(value)).shouldHave(matchText(exists));
         }

@@ -1,13 +1,12 @@
 package pageObjects.cucumber;
 
 import com.codeborne.selenide.ElementsCollection;
-import cucumber.api.Transpose;
 import cucumber.api.java.en.*;
+import io.cucumber.datatable.DataTable;
 import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.codeborne.selenide.CollectionCondition.*;
 import static com.codeborne.selenide.Condition.*;
@@ -105,15 +104,10 @@ public class UserTableSelenide {
 
     @Step
     @And("User table contains following values:")
-    public void checkTableContains(@Transpose List<List<String>> content) {
-        numberColumns.shouldHave(texts(
-                content.get(0).stream().filter(s -> !s.equals("Number")).collect(Collectors.toList())));
-
-        userColumns.shouldHave(texts(
-                content.get(1).stream().filter(s -> !s.equals("User")).collect(Collectors.toList())));
-
-        textDescriptionColumns.shouldHave(texts(
-                content.get(2).stream().filter(s -> !s.equals("Description")).collect(Collectors.toList())));
+    public void checkTableContains(DataTable content) {
+        numberColumns.shouldHave(texts(content.column(0).subList(1, content.height())));
+        userColumns.shouldHave(texts(content.column(1).subList(1, content.height())));
+        textDescriptionColumns.shouldHave(texts(content.column(2).subList(1, content.height())));
     }
 
     @Step
@@ -124,7 +118,7 @@ public class UserTableSelenide {
 
     @Step
     @Then("droplist contains values:")
-    public void checkContainsUserType(@Transpose List<String> content) {
+    public void checkContainsUserType(List<String> content) {
         typeColumns.get(lastRow).shouldHave(and("Droplist contains values",
                 matchText(content.get(1)), matchText(content.get(2)), matchText(content.get(3))));
     }
