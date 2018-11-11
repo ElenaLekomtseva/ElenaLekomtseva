@@ -1,7 +1,6 @@
 package pageObjects.cucumber;
 
 import com.codeborne.selenide.ElementsCollection;
-import cucumber.api.PendingException;
 import cucumber.api.Transpose;
 import cucumber.api.java.en.*;
 import io.qameta.allure.Step;
@@ -19,28 +18,30 @@ public class UserTableSelenide {
     //====================== fields ======================
 
     @FindBy(css = "#user-table > tbody > tr")
-    ElementsCollection tableRows;
+    private ElementsCollection tableRows;
 
     @FindBy(css = "#user-table > tbody > tr > td:nth-child(1)")
-    ElementsCollection numberColumns;
+    private ElementsCollection numberColumns;
 
     @FindBy(css = "#user-table > tbody > tr > td:nth-child(2)")
-    ElementsCollection typeColumns;
+    private ElementsCollection typeColumns;
 
     @FindBy(css = "#user-table > tbody > tr > td:nth-child(3)")
-    ElementsCollection userColumns;
+    private ElementsCollection userColumns;
 
     @FindBy(css = "#user-table > tbody > tr > td:nth-child(4) > img")
-    ElementsCollection imgDescriptionColumns;
+    private ElementsCollection imgDescriptionColumns;
 
-    @FindBy(css = "#user-table > tbody > tr > td:nth-child(4) > div")
-    ElementsCollection textDescriptionColumns;
+    @FindBy(css = "#user-table > tbody > tr > td:nth-child(4) > div > span")
+    private ElementsCollection textDescriptionColumns;
 
     @FindBy(css = "#user-table > tbody > tr > td:nth-child(4) > div > input")
-    ElementsCollection checkboxDescriptionColumns;
+    private ElementsCollection checkboxDescriptionColumns;
 
     @FindBy(css = ".logs > li")
-    ElementsCollection logs;
+    private ElementsCollection logs;
+
+    private int lastRow = -1;
 
     public BasePageSelenide basePage = new BasePageSelenide();
 
@@ -50,14 +51,28 @@ public class UserTableSelenide {
 
     //====================== methods ======================
 
-    @When("I select 'vip' checkbox for \"(.+)\"")
-    public void selectVipUser(String user) {
+    private int findIndexRowByUserName(String user) {
         for (int i = 0; i < userColumns.size(); i++) {
             if (userColumns.get(i).getText().equals(user)) {
-                checkboxDescriptionColumns.get(i).click();
-                break;
+                return i;
             }
         }
+
+        return -1;
+    }
+
+    @Step
+    @When("I select 'vip' checkbox for \"(.+)\"")
+    public void selectVipUser(String user) {
+        lastRow = findIndexRowByUserName(user);
+        checkboxDescriptionColumns.get(lastRow).click();
+    }
+
+    @Step
+    @When("I click on dropdown in column (.+) for user (.+)")
+    public void clickUserType(String type, String user) {
+        lastRow = findIndexRowByUserName(user);
+        typeColumns.get(lastRow).click();
     }
 
     //====================== checks ======================
@@ -97,9 +112,8 @@ public class UserTableSelenide {
         userColumns.shouldHave(texts(
                 content.get(1).stream().filter(s -> !s.equals("User")).collect(Collectors.toList())));
 
-        /*System.out.println(textDescriptionColumns.texts());
         textDescriptionColumns.shouldHave(texts(
-                content.get(2).stream().filter(s -> !s.equals("Description")).collect(Collectors.toList())));*/
+                content.get(2).stream().filter(s -> !s.equals("Description")).collect(Collectors.toList())));
     }
 
     @Step
@@ -108,27 +122,10 @@ public class UserTableSelenide {
         logs.get(0).shouldHave(text(log));
     }
 
-    private int index = -1;
-    @When("I click on dropdown in column (.+) for user (.+)")
-    public void clickUserType(String type, String user) {
-        for (int i = 0; i < userColumns.size(); i++) {
-            if (userColumns.get(i).getText().equals(user)) {
-                index = i;
-                break;
-            }
-        }
-
-        if (index > -1) {
-            typeColumns.get(index).click();
-        }
-    }
-
-    @Then("droplist contains values")
-    public void clickUserType(@Transpose List<String> content) {
-        if (index > -1) {
-            System.out.println(String.join("\n", content));
-            System.out.println(typeColumns.get(index).text());
-            typeColumns.get(index).shouldHave(text(String.join("\n", content)));
-        }
+    @Step
+    @Then("droplist contains values:")
+    public void checkContainsUserType(@Transpose List<String> content) {
+        typeColumns.get(lastRow).shouldHave(and("Droplist contains values",
+                matchText(content.get(1)), matchText(content.get(2)), matchText(content.get(3))));
     }
 }

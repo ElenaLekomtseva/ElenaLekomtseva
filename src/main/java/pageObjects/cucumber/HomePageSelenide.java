@@ -2,25 +2,13 @@ package pageObjects.cucumber;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.*;
-import enums.HomePageMenu;
-import enums.ServiceMenu;
 import io.qameta.allure.Step;
 import org.openqa.selenium.support.*;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static com.codeborne.selenide.CollectionCondition.texts;
-import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.page;
-import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
-import static org.testng.Assert.assertEquals;
-
-import static enums.HomePageMenu.*;
 
 public class HomePageSelenide {
 
@@ -28,6 +16,9 @@ public class HomePageSelenide {
 
     @FindBy(css = "h3.main-title")
     private SelenideElement mainTitle;
+
+    @FindBy(css = "p.main-txt")
+    private SelenideElement mainText;
 
     @FindBy(css = "div.benefit-icon")
     private ElementsCollection benefitsElements;
@@ -51,14 +42,22 @@ public class HomePageSelenide {
 
     //====================== checks ======================
 
+    @Step
     @And("(\\d+) pictures are displayed on Home page")
-    public void picturesAreDisplayedOnHomePage(int count) {
+    public void checkPicturesOnHomePage(int count) {
         benefitsElements.shouldHaveSize(count);
     }
 
+    @Step
     @And("(\\d+) text under pictures are displayed on Home page")
-    public void textUnderPicturesAreDisplayedOnHomePage(int count) {
+    public void checkTextUnderPicturesOnHomePage(int count) {
         benefitsElements.shouldHaveSize(count);
     }
 
+    @Step
+    @And("(\\d+) text above are displayed on Home page")
+    public void checkMainContentOnHomePage(int count) {
+        mainTitle.shouldHave(visible);
+        mainText.shouldHave(visible);
+    }
 }

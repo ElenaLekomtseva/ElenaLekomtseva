@@ -4,7 +4,7 @@
     <test name="Cucumber Tests"   >
         <classes>
             <!--class name="runners.CucumberTestngRunner" /-->
-            <class name="runners.CucumberHW6Runner"></class>
+            <class name="runners.HW6CucumberRunner"></class>
         </classes>
     </test>
 </suite>

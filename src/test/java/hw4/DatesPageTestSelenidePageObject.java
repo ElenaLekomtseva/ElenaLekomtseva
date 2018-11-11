@@ -1,26 +1,17 @@
-package hw5;
+package hw4;
 
 import base.TestBaseSelenide;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Issue;
-import io.qameta.allure.Story;
-import listeners.AllureAttachmentListener;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pageObjects.DatesPageSelenide;
 import pageObjects.HomePageSelenide;
 
 import static com.codeborne.selenide.Selenide.page;
-import static enums.HomePageMenu.HOME;
+import static enums.HomePageMenu.*;
 import static enums.HomePageMenu.SERVICE;
 import static enums.ServiceMenu.DATES;
 import static enums.Users.PITER_CHALOVSKII;
 
-@Feature("Allure and Jenkins tests")
-@Story("Dates page sliders test")
-@Listeners(AllureAttachmentListener.class)
-public class DatesPageSlidersTestJenkinsPageObject extends TestBaseSelenide {
+public class DatesPageTestSelenidePageObject extends TestBaseSelenide {
 
     private HomePageSelenide homePageSelenide;
     private DatesPageSelenide datesPageSelenide;
@@ -31,27 +22,26 @@ public class DatesPageSlidersTestJenkinsPageObject extends TestBaseSelenide {
         datesPageSelenide = page(DatesPageSelenide.class);
     }
 
-    @Issue("Bug checkLog(30, 70)")
     @Test
-    public void simpleTest() {
+    public void slidersTest() {
 
         //1 Navigate
         homePageSelenide.openHomePage();
 
         //2 Assert Title
-        homePageSelenide.checkTitle(HOME.getTitle());
+        homePageSelenide.checkTitle(HOME);
 
         //3 Login
         homePageSelenide.login(PITER_CHALOVSKII);
 
         //4 Assert User name in the left-top side of screen that user is loggined
-        homePageSelenide.checkProfileName(PITER_CHALOVSKII.profileName);
+        homePageSelenide.checkProfileName(PITER_CHALOVSKII);
 
         //5 Open through the header menu Service -> Dates Page
         //7 Open through the header menu Service -> Different Elements Page
         homePageSelenide.clickHeaderMenu(SERVICE);
         homePageSelenide.clickServiceHeaderMenu(DATES);
-        datesPageSelenide.checkTitle(DATES.getTitle());
+        datesPageSelenide.checkTitle(DATES);
 
         //6 Using drag-and-drop set Range sliders. left sliders - the most left position,
         // right slider - the most rigth position: From = 0, To = 100

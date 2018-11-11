@@ -40,19 +40,19 @@ public class ServicePageInterfaceFailedTestJenkins extends TestBaseSelenide {
 
     @Issue("bug not find WIND in log")
     @Test
-    public void simpleTest() {
+    public void servicePageElementsTest() {
 
         //1 Navigate
         homePageSelenide.openHomePage();
 
         //2 Assert Title
-        homePageSelenide.checkTitle(HOME.getTitle());
+        homePageSelenide.checkTitle(HOME);
 
         //3 Login
         homePageSelenide.login(PITER_CHALOVSKII);
 
         //4 Assert User name in the left-top side of screen that user is logined
-        homePageSelenide.checkProfileName(PITER_CHALOVSKII.profileName);
+        homePageSelenide.checkProfileName(PITER_CHALOVSKII);
 
         //5 Click on "Service" subcategory in the header and check that drop down contains options
         homePageSelenide.clickHeaderMenu(SERVICE);
@@ -65,7 +65,7 @@ public class ServicePageInterfaceFailedTestJenkins extends TestBaseSelenide {
         //7 Open through the header menu Service -> Different Elements Page
         homePageSelenide.clickHeaderMenu(SERVICE);
         homePageSelenide.clickServiceHeaderMenu(DIFFERENT_ELEMENTS);
-        differentElementsPageSelenide.checkTitle(DIFFERENT_ELEMENTS.getTitle());
+        differentElementsPageSelenide.checkTitle(DIFFERENT_ELEMENTS);
 
         //8 Check interface on Different elements page, it contains all needed elements
         differentElementsPageSelenide.checkCheckbox(NatureForces.values().length);

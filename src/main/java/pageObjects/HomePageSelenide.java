@@ -4,6 +4,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import enums.HomePageMenu;
 import enums.ServiceMenu;
+import enums.Users;
 import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
 
@@ -79,8 +80,8 @@ public class HomePageSelenide extends AbstractPageSelenide {
     //====================== checks ======================
 
     @Step
-    public void checkProfileName(String profileName) {
-        profileButton.shouldHave(text(profileName));
+    public void checkProfileName(Users profile) {
+        profileButton.shouldHave(text(profile.profileName));
     }
 
     @Step

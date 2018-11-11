@@ -23,12 +23,10 @@ public class DatesPageSelenide extends AbstractPageSelenide {
 
     //====================== methods ======================
 
-    @Step
     private double getStep() {
         return (double) slider.getSize().width / 100.0;
     }
 
-    @Step
     private void moveHandler(SelenideElement handler, double position) {
         double currentPosition = Double.parseDouble(handler.text());
         double factor = currentPosition >= position ? 1 : 0;

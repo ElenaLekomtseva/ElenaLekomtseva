@@ -2,21 +2,16 @@ package pageObjects.cucumber;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import cucumber.api.PendingException;
+import cucumber.api.Transpose;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import enums.HomePageMenu;
-import enums.ServiceMenu;
+import enums.Users;
 import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
-
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static com.codeborne.selenide.CollectionCondition.texts;
-import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.page;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
@@ -57,35 +52,35 @@ public class BasePageSelenide {
     //====================== methods ======================
 
     @Step
-    @And("I login as user \"(.+)\" password (.+)")
-    public void login(String login, String password) {
-        profileButton.click();
-        this.login.sendKeys(login);
-        this.password.sendKeys(password);
-        submit.click();
+    @And("I login as user \"(.+)\"")
+    public void login(String profile) {
+        for (Users user : Users.values()) {
+            if (user.profileName.equals(profile.toUpperCase())) {
+                profileButton.click();
+                this.login.sendKeys(user.login);
+                this.password.sendKeys(user.password);
+                submit.click();
+                break;
+            }
+        }
     }
 
     @Step
     @When("I click on \"(.+)\" button in Header")
     public void clickHeaderMenu(String homePageMenuItem) {
-        headerMenu.get(HomePageMenu.valueOf(homePageMenuItem).getIndex()).click();
+        headerMenu.find(text(homePageMenuItem)).click();
     }
 
     @Step
-    public void clickSidebarMenu(HomePageMenu item) {
-        siderbarMenu.get(item.getIndex()).click();
+    @When("I click on \"(.*)\" sidebar")
+    public void clickServiceSidebarMenu(String homePageSiderbarMenuItem) {
+        siderbarMenu.find(text(homePageSiderbarMenuItem)).click();
     }
 
     @Step
     @When("I click on \"(.+)\" button in Service dropdown")
     public void clickServiceHeaderMenu(String dropdownServiceHeaderMenuItem) {
-        dropdownServiceHeaderMenu.get(ServiceMenu.valueOf(dropdownServiceHeaderMenuItem).getIndex()).click();
-    }
-
-    @Step
-    @When("I click on \"(.*)\" sidebar")
-    public void checkServiceSidebarMenu(String homePageSiderbarMenuItem) {
-        siderbarMenu.get(HomePageMenu.valueOf(homePageSiderbarMenuItem).getIndex()).click();
+        dropdownServiceHeaderMenu.find(text(dropdownServiceHeaderMenuItem)).click();
     }
 
     //====================== checks ======================
@@ -99,16 +94,18 @@ public class BasePageSelenide {
     @Step
     @Then("\"(.+)\" user is loggined")
     public void checkProfileName(String profileName) {
-        profileButton.shouldHave(text(profileName));
+        profileButton.shouldHave(text(profileName.toUpperCase()));
     }
 
     @Step
-    public void checkServiceHeaderMenu() {
-        List<String> serviceMenuValues = Stream.of(enums.ServiceMenu.values())
-                .map(Enum::toString)
-                .map(String::toUpperCase)
-                .collect(Collectors.toList());
-        dropdownServiceHeaderMenu.shouldHave(texts(serviceMenuValues));
+    @Then("\"Service\" subcategory in the header contains options:")
+    public void checkServiceHeaderMenu(@Transpose List<String> options) {
+        dropdownServiceHeaderMenu.shouldHave(texts(options));
     }
 
+    @Step
+    @Then("\"Service\" subcategory in the siderbar contains options:")
+    public void checkServiceSidebarMenu(@Transpose List<String> options) {
+        dropdownServiceSidebarMenu.shouldHave(texts(options));
+    }
 }
