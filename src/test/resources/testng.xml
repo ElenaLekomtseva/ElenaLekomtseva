@@ -3,10 +3,6 @@
 <suite name="Test Suite" verbose="1" >
     <test name="Simple Test"   >
 
-        <!--packages>
-            <package name="test.sample" />
-        </packages-->
-
         <groups>
             <run>
                 <include name="Group1" />
