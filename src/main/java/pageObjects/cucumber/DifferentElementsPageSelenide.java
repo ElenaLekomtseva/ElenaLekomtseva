@@ -46,7 +46,7 @@ public class DifferentElementsPageSelenide {
     //====================== methods =====================
 
     @Step
-    @When("(Select|Unselect) checkboxes")
+    @When("(Uns|S)elect checkboxes:")
     public void clickCheckBox(List<String> values) {
         for (String value : values) {
             checkboxs.find(text(value)).click();
@@ -104,7 +104,7 @@ public class DifferentElementsPageSelenide {
     }
 
     @Step
-    @Then("Log rows are displayed, checkbox name and its status (.+) is corresponding to values")
+    @Then("Log rows are displayed, checkbox name and its status (.+) is corresponding to values:")
     public void checkLogCheckbox(String exists, List<String> values) {
         for (String value : values) {
             logs.findBy(matchText(value)).shouldHave(matchText(exists));

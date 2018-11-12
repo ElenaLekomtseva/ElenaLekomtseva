@@ -41,10 +41,10 @@ Feature: Home Page tests
     And Right section is displayed
     And Left section is displayed
 
-    When Select checkboxes
+    When Select checkboxes:
       | Water |
       | Wind  |
-    Then Log rows are displayed, checkbox name and its status true is corresponding to values
+    Then Log rows are displayed, checkbox name and its status true is corresponding to values:
       | Water |
       | Wind  |
 
@@ -54,9 +54,9 @@ Feature: Home Page tests
     When Select in dropdown Yellow
     Then Log row is displayed, dropdown name and selected Yellow
 
-    When Unselect checkboxes
+    When Unselect checkboxes:
       | Water |
       | Wind  |
-    Then Log rows are displayed, checkbox name and its status false is corresponding to values
+    Then Log rows are displayed, checkbox name and its status false is corresponding to values:
       | Water |
       | Wind  |
