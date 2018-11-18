@@ -1,6 +1,6 @@
-Feature: Home Page tests
+Feature: Service Page Interface tests
 
-  Scenario: Service Page Interface test
+  Scenario: Service Page Interface check
     Given I am on "Home Page"
     Then "Home Page" page is opened
     And I login as user "Piter Chailovskii"
@@ -44,19 +44,19 @@ Feature: Home Page tests
     When Select checkboxes:
       | Water |
       | Wind  |
-    Then Log rows are displayed, checkbox name and its status true is corresponding to values:
+    Then log rows are displayed and its status true:
       | Water |
       | Wind  |
 
     When Select radio Selen
-    Then Log row is displayed, radiobutton name and selected Selen
+    Then log row is displayed and selected radio Selen
 
     When Select in dropdown Yellow
-    Then Log row is displayed, dropdown name and selected Yellow
+    Then log row is displayed and selected dropdown Yellow
 
     When Unselect checkboxes:
       | Water |
       | Wind  |
-    Then Log rows are displayed, checkbox name and its status false is corresponding to values:
+    Then log rows are displayed and its status false:
       | Water |
       | Wind  |

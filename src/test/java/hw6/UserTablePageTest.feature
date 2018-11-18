@@ -1,6 +1,6 @@
-Feature: Home Page tests
+Feature: User Table Page tests
 
-  Scenario: User Table Page test
+  Scenario: User Table Page check
     Given I am on "Home Page"
     And I login as user "Piter Chailovskii"
     When I click on "Service" button in Header

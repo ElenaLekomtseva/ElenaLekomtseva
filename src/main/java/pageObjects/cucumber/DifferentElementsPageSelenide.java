@@ -104,21 +104,21 @@ public class DifferentElementsPageSelenide {
     }
 
     @Step
-    @Then("Log rows are displayed, checkbox name and its status (.+) is corresponding to values:")
-    public void checkLogCheckbox(String exists, List<String> values) {
-        for (String value : values) {
-            logs.findBy(matchText(value)).shouldHave(matchText(exists));
+    @Then("log rows are displayed and its status (.+):")
+    public void checkLogCheckbox(String exists, List<String> items) {
+        for (String item : items) {
+            logs.findBy(matchText(item)).shouldHave(matchText(exists));
         }
     }
 
     @Step
-    @When("Log row is displayed, radiobutton name and selected (.+)")
+    @When("log row is displayed and selected radio (.+)")
     public void checkLogRadio(String value) {
         logs.findBy(matchText("metal")).shouldHave(matchText(value));
     }
 
     @Step
-    @When("Log row is displayed, dropdown name and selected (.+)")
+    @When("log row is displayed and selected dropdown (.+)")
     public void checkLogDropDown(String value) {
         logs.findBy(matchText("Colors")).shouldHave(matchText(value));
     }
