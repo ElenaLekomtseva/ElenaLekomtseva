@@ -44,19 +44,19 @@ Feature: Service Page Interface tests
     When Select checkboxes:
       | Water |
       | Wind  |
-    Then log rows are displayed and its status true:
+    Then Log rows are displayed and its status true:
       | Water |
       | Wind  |
 
     When Select radio Selen
-    Then log row is displayed and selected radio Selen
+    Then Log row is displayed and selected radio Selen
 
     When Select in dropdown Yellow
-    Then log row is displayed and selected dropdown Yellow
+    Then Log row is displayed and selected dropdown Yellow
 
     When Unselect checkboxes:
       | Water |
       | Wind  |
-    Then log rows are displayed and its status false:
+    Then Log rows are displayed and its status false:
       | Water |
       | Wind  |

@@ -104,7 +104,7 @@ public class DifferentElementsPageSelenide {
     }
 
     @Step
-    @Then("log rows are displayed and its status (.+):")
+    @Then("Log rows are displayed and its status (.+):")
     public void checkLogCheckbox(String exists, List<String> items) {
         for (String item : items) {
             logs.findBy(matchText(item)).shouldHave(matchText(exists));
@@ -112,13 +112,13 @@ public class DifferentElementsPageSelenide {
     }
 
     @Step
-    @When("log row is displayed and selected radio (.+)")
+    @When("Log row is displayed and selected radio (.+)")
     public void checkLogRadio(String value) {
         logs.findBy(matchText("metal")).shouldHave(matchText(value));
     }
 
     @Step
-    @When("log row is displayed and selected dropdown (.+)")
+    @When("Log row is displayed and selected dropdown (.+)")
     public void checkLogDropDown(String value) {
         logs.findBy(matchText("Colors")).shouldHave(matchText(value));
     }
